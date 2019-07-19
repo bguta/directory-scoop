@@ -1,21 +1,13 @@
 import os
 import argparse
-
-def replace(path):
-    cwd = os.path.join(path, '')
-    entries = os.listdir(cwd)
-    files = list(filter(lambda x: os.path.isfile(cwd + x), entries))
-    directories = list(filter(lambda x: not os.path.isfile(cwd + x), entries))
-    
-    # create the replacement files
-    generate(files, cwd)
-    return list(map(lambda x: replace(cwd+ x), directories))
     
 def generate(files, cwd):
+    #------------------------------------------------------------------------------------------#
     # words to replace, make sure that each element in orignal corresponds to the same element in new
     # order is important, make sure to have the plural form first and the singular afterwards.
-    orignal = ["Organizations", "organizations", "Organization", "organization"]
-    new = ["Contracts", "contracts", "Contract", "contract"]
+    orignal = ["Organizations", "organizations", "Organization", "organization"] # You can modify this fiels
+    new     = ["Contracts", "contracts", "Contract", "contract"] # You can modify this fiels
+    #------------------------------------------------------------------------------------------#
     
     mapping = {x:y for x,y in zip(orignal, new)}
     replacements = list(mapping.items())
@@ -37,8 +29,21 @@ def generate(files, cwd):
                     for rp in replacements:
                         line = line.replace(rp[0], rp[1])
                     outputF.write(line)
+def replace(path):
+    cwd = os.path.join(path, '')
+    entries = os.listdir(cwd)
+    files = list(filter(lambda x: os.path.isfile(cwd + x), entries))
+    directories = list(filter(lambda x: not os.path.isfile(cwd + x), entries))
+    
+    # create the replacement files
+    generate(files, cwd)
+    return list(map(lambda x: replace(cwd+ x), directories))
+    
+#--------------------------------#
 ap = argparse.ArgumentParser()
-ap.add_argument("-d", "--dir", required=True, help="Relative Path to the head directory of the files to be replaced")
+ap.add_argument("-p", "--path", required=True, help="Relative Path to the head directory of the files to be replaced (eg. ..\D1\D2 )")
 args = vars(ap.parse_args())
-replace(os.getcwd() + args["dir"])
+
+replace(os.path.join(os.getcwd(), args["path"]))
 print("Done Generating the files")
+#--------------------------------#
