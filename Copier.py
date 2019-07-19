@@ -37,12 +37,16 @@ def generate(files, cwd):
 def replace(path):
     cwd = os.path.join(path, '')
     entries = os.listdir(cwd)
-    files = list(filter(lambda x: os.path.isfile(cwd + x), entries))
-    directories = list(filter(lambda x: not os.path.isfile(cwd + x), entries))
+    def fn(x):
+        return os.path.isfile(cwd + x)
+    def nfn(x):
+        return not fn(x)
+    files = list(filter(fn, entries))
+    directories = list(filter(nfn, entries))
     
     # create the replacement files
     generate(files, cwd)
-    return [replace(cwd + x) for x in directories)]
+    return [replace(cwd + x) for x in directories]
     
 #--------------------------------#
 ap = argparse.ArgumentParser()
