@@ -32,7 +32,7 @@ def generate(files, cwd):
                             line = line.replace(rp[0], rp[1])
                         outputF.write(line)
 
-    return list(map(lambda x: reproduce(x), files))
+    return list(map(reproduce, files))
 
 def replace(path):
     cwd = os.path.join(path, '')
@@ -42,7 +42,7 @@ def replace(path):
     
     # create the replacement files
     generate(files, cwd)
-    return list(map(lambda x: replace(cwd+ x), directories))
+    return [replace(cwd + x) for x in directories)]
     
 #--------------------------------#
 ap = argparse.ArgumentParser()
