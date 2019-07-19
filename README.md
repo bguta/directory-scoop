@@ -1,5 +1,5 @@
 # File Copier
-
+A script to copy an existsing directory structure by replacing key words found in the files and directories
 ## Requirements
 * python 3.x
 
@@ -19,8 +19,11 @@ python Copier.py -h
 This is a script that is designed to copy existing files within a directory and generate 
 files and directories by replacing the keywords found eg. (Contract, Organization, JobRole, etc).
 
-You can modify the script to change the mapping of words, just replace the following two lists:
+You can modify the script to change the mapping of words, just replace the enteries in the following two lists:
 * original
 * new
 
-However, make sure that the one to one correspondence is maintained between the lists
+However, make sure that the one to one correspondence is maintained between the lists.
+
+## Authors
+* **Bereket Guta** - Ask me if you need help understanding/using the code
