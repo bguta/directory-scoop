@@ -26,4 +26,4 @@ You can modify the script to change the mapping of words, just replace the enter
 However, make sure that the one to one correspondence is maintained between the lists.
 
 ## Authors
-* **Bereket Guta** - Ask me if you need help understanding/using the code
+* [Bereket Guta](https://github.com/bguta) - Ask me if you need help understanding/using the code
